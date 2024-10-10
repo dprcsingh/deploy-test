@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+  - lint
+  - deploy
+
+
+variables:
+  NODE_IMAGE: "node:18-alpine"
+
+
+build:
+  stage: build
+  image: $NODE_IMAGE
+  script:
+    - echo "Installing dependencies"
+    - npm install  # Install dependencies
+    - echo "Running build"
+    - npm run build  # Build the application
+  only:
+    - develop
+    -  /^hotfix\/.*$/
